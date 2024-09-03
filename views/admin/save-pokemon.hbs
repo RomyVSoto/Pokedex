@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-12 col-sm-6 offset-sm-3">
+
+    <div class="card">
+      <div class="card-header bg-primary text-light">
+        Formulario de Pokemon
+      </div>
+      <div class="card-body">
+
+        <form method="POST" action="/admin/{{#if editMode}}edit-pokemon{{else}}add-pokemon{{/if}}">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" {{#if editMode}} value="{{pokemon.name}}" {{/if}} class="form-control" id="name" name="Name" />
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image url:</label>
+            <input type="text" {{#if editMode}} value="{{pokemon.imageUrl}}" {{/if}} class="form-control" id="image" name="Image" />
+          </div>
+          <div class="mb-3">
+            <label for="type" class="form-label">Tipo</label>
+            <select class="form-control" id="type" name="TypeId">
+              <option value="" selected>Seleccione un tipo</option>
+              {{#each tipos}}
+                <option value="{{this.id}}" {{#if (eq this.id ../pokemon.typeId)}}{{/if}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+
+          </div>
+          <div class="mb-3">
+            <label for="type" class="form-label">Region</label>
+            <select class="form-control" id="region" name="RegionId">
+              <option value="" selected>Seleccione una region</option>
+              {{#each regiones}}
+                <option value="{{this.id}}" {{#if (eq this.id ../pokemon.regionId)}}{{/if}}>{{this.name}}</option>
+              {{/each}}
+            </select>
+
+          </div>
+
+          {{#if editMode}}
+          <input type="hidden" value="{{pokemon.id}}" name="PokemonId">
+          {{/if}}
+
+          <button type="submit" class="btn btn-primary float-end">Save</button>
+          <a href="/admin/pokemones" class="btn btn-warning float-end me-2">Back to list</a>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>

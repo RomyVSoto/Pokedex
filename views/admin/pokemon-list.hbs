@@ -1,0 +1,60 @@
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-2">
+    <a href="/" class="btn btn-warning"> Back to home </a>
+  </div>
+  <div class="col-15 col-sm-2">
+    <a href="/admin/add-pokemon" class="btn btn-success">+ Nuevo pokemon</a>
+  </div>
+</div>
+
+
+{{#if hasPokemones}}
+
+  <h1>Pokemon list</h1>
+
+  <div class="row">
+
+    {{#each pokes}}
+
+      <div class="col-12 col-sm-4">
+        <div class="card">
+          <img
+            src="{{this.imageUrl}}"
+            class="card-img-top img-size"
+            alt="..."
+          />
+          <div class="card-body">
+            <h4 class="card-title">{{this.name}}</h4>
+            <h5 class="card-title"><em>Tipo:</em> {{this.tipo.name}}</h5>
+            <h5 class="card-title"><em>Region:</em> {{this.region.name}}</h5>
+            <div class="mt-2">
+              <a
+                href="/admin/edit-pokemon/{{this.id}}"
+                class="btn btn-primary float-end"
+              >Edit</a>
+              <form
+                method="post"
+                action="/admin/pokemon-delete"
+                class="form-delete"
+              >
+                <input type="hidden" value="{{this.id}}" name="PokemonId" />
+                <button
+                  type="submit"
+                  class="btn btn-danger float-end me-2 delete-pokemon"
+                >Delete</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    {{/each}}
+
+  </div>
+
+{{else}}
+
+  <h1>No pokemons found!</h1>
+
+{{/if}}

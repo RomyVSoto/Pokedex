@@ -1,0 +1,28 @@
+<div class="row mb-3">
+  <div class="col-12 col-sm-4">
+    <a href="/" class="btn btn-warning"> Back to home </a>
+  </div>
+</div>
+
+{{#if hasPokemon}}
+
+<div class="row">
+
+  <div class="col-12 col-sm-4 mx-auto mb-5">
+    <div class="card">
+      <div class="card-body mx-auto text-center">
+        <h4 class="card-title mb-3 fw-bold">{{pokemon.name}}</h4>
+        <h5 class="card-title"><em>Tipo: </em>{{pokemon.tipo.name}}</h5>
+        <h5 class="card-title"><em>Region: </em>{{pokemon.region.name}}</h5>
+      </div>
+      <img src="{{pokemon.imageUrl}}" class="card-img-top" alt="..." />
+    </div>
+  </div>
+
+</div>
+
+{{else}}
+
+<h1>pokemon not found!</h1>
+
+{{/if}}

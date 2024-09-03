@@ -1,0 +1,42 @@
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-2">
+    <a href="/" class="btn btn-warning"> Back to home </a>
+  </div>
+  <div class="col-15 col-sm-2">
+    <a href="/admin/add-region" class="btn btn-success">+ Nueva region</a>
+  </div>
+</div>
+
+
+{{#if hasRegiones}}
+
+<h1>Region list</h1>
+
+<div class="row">
+
+  {{#each regs}}
+
+  <div class="col-12 col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{this.name}}</h5>
+        <div class="mt-2">
+          <a href="/admin/edit-region/{{this.id}}" class="btn btn-primary float-end">Edit</a>
+          <form method="post" action="/admin/region-delete" class="form-delete">
+            <input type="hidden" value="{{this.id}}" name="RegionId" />
+            <button type="submit" class="btn btn-danger float-end me-2 delete-region">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{/each}}
+
+</div>
+
+{{else}}
+
+<h1>No regions found!</h1>
+
+{{/if}}

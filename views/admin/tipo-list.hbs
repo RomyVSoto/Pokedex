@@ -1,0 +1,41 @@
+<div class="row mt-2 mb-2">
+  <div class="col-12 col-sm-2">
+    <a href="/" class="btn btn-warning"> Back to home </a>
+  </div>
+  <div class="col-15 col-sm-2">
+    <a href="/admin/add-tipo" class="btn btn-success">+ Nuevo tipo</a>
+  </div>
+</div>
+
+{{#if hasTipos}}
+
+<h1>Type list</h1>
+
+<div class="row">
+
+  {{#each types}}
+
+  <div class="col-12 col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{this.name}}</h5>
+        <div class="mt-2">
+          <a href="/admin/edit-tipo/{{this.id}}" class="btn btn-primary float-end">Edit</a>
+          <form method="post" action="/admin/tipo-delete" class="form-delete">
+            <input type="hidden" value="{{this.id}}" name="TypeId" />
+            <button type="submit" class="btn btn-danger float-end me-2 delete-tipo">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{/each}}
+
+</div>
+
+{{else}}
+
+<h1>No Types found!</h1>
+
+{{/if}}

@@ -1,0 +1,68 @@
+{{#if hasPokemones}}
+
+<div class="w-25 mx-auto ms-auto">
+  <form action="/filter-by-type" method="GET">
+    <div class="input-group mb-3 mx-3">
+      <label for="tipo" class="mt-2 mx-3 fw-bold"><em>Tipo:</em> </label>
+      <select class="form-select" id="tipo" name="typeId" aria-label="Filtrar por tipo">
+        <option selected></option>
+        {{#each tipos}}
+        <option value="{{this.id}}" {{#if (eq this.id ../selectedType)}}{{/if}}>{{this.name}}</option>
+        {{/each}}
+      </select>
+      <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Filtrar</button>
+    </div>
+  </form>
+
+  <form action="/filter-by-region" method="GET">
+    <div class="input-group mb-3 mx-3">
+      <label for="tipo" class="mt-2 mx-2 fw-bold"><em>Region:</em> </label>
+      <select class="form-select" name="regionId" aria-label="Filtrar por region">
+        <option selected></option>
+        {{#each regs}}
+        <option value="{{this.id}}" {{#if (eq this.id ../selectedRegion)}}{{/if}}>{{this.name}}</option>
+        {{/each}}
+      </select>
+      <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Filtrar</button>
+    </div>
+  </form>
+</div>
+
+<h1>Pokemon list</h1>
+
+<div class="row">
+
+  {{#each pokes}}
+
+  <div class="col-12 col-sm-3">
+    <div class="card">
+      <img src="{{this.imageUrl}}" class="card-img-top img-size" alt="..." />
+      <div class="card-body">
+        <h4 class="card-title">{{this.name}}</h4>
+        <h5 class="card-title">{{this.tipo.name}} - {{this.region.name}}</h5>
+        <a href="/pokemon-detail/{{this.id}}" class="btn btn-primary">Details</a>
+      </div>
+    </div>
+  </div>
+
+  {{/each}}
+
+</div>
+
+{{else}}
+
+<div class="col-12 col-sm-2 mb-3">
+  <a href="/" class="btn btn-warning"> Back to home </a>
+</div>
+
+<h1>No pokemons found!</h1>
+
+{{/if}}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var selectedType = "{{selectedType}}";
+    var typeSelect = document.querySelector('select[name="typeId"]');
+    typeSelect.value = selectedType;
+  });
+</script>
